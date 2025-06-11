@@ -18,7 +18,8 @@ const filterLabels: Record<TaskFilter, string> = {
 </script>
 
 <template>
-    <button :class="{ active: props.filter === props.currentFilter }" @click="emit('setFilter', props.filter)">
+    <button class="secondary" :class="{ contrast: props.currentFilter === props.filter }"
+        @click="emit('setFilter', props.filter)">
         {{ filterLabels[props.filter] }}
     </button>
 </template>

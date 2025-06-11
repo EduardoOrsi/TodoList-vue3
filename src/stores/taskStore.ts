@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { loadTasks, saveTasks } from '../infrastructure/task/taskRepository'
-import { type TaskFilter, type Task } from '../types'
+import type { TaskFilter, Task } from '../domain/task/Task'
 import { createTask } from '../application/task/createTask'
 import { toggleTask } from '../application/task/toggleTask'
 import { removeTask } from '../application/task/removeTask'

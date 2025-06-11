@@ -19,8 +19,15 @@ function onSubmit() {
 
 <template>
     <form @submit.prevent="onSubmit">
-        <input v-model="newTask" placeholder="Nova tarefa" />
-        <button>Adicionar</button>
-        <span v-if="error">{{ error }}</span>
+        <label for="new-task">Nova Tarefa</label>
+        <input v-model="newTask" :aria-invalid="!!error || undefined" name="newTask" @input="error = ''">
+        <small v-if="error" id="invalid-helper">
+            {{ error }}
+        </small>
+        <div class="button-container">
+            <button>
+                Adicionar Tarefa
+            </button>
+        </div>
     </form>
 </template>

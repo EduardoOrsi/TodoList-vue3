@@ -1,5 +1,5 @@
 import { isValidTaskTitle } from "../../domain/task/taskRules";
-import type { Task } from "../../types";
+import type { Task } from "../../domain/task/Task";
 
 export function createTask(title: string): Task {
     if (!isValidTaskTitle(title)) {

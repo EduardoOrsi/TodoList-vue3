@@ -19,15 +19,18 @@ function onSubmit() {
 
 <template>
     <form @submit.prevent="onSubmit">
-        <label for="new-task">Nova Tarefa</label>
-        <input v-model="newTask" :aria-invalid="!!error || undefined" name="newTask" @input="error = ''">
-        <small v-if="error" id="invalid-helper">
+        <fieldset role="group">
+            <input v-model="newTask" :aria-invalid="!!error || undefined" name="newTask" @input="error = ''">
+            <input type="submit" value="Adicionar" />
+        </fieldset>
+        <small v-if="error" id="invalid-helper" class="error">
             {{ error }}
         </small>
-        <div class="button-container">
-            <button>
-                Adicionar Tarefa
-            </button>
-        </div>
     </form>
 </template>
+
+<style>
+.error {
+    color: #e08383;
+}
+</style>

@@ -4,7 +4,11 @@ import TaskList from './components/TaskList.vue'
 import { useTaskStore } from './stores/taskStore'
 import ButtonFilter from './components/ButtonFilter.vue'
 import { type TaskFilter } from './domain/task/Task'
+import { storeToRefs } from 'pinia';
+
 const store = useTaskStore()
+const { filteredTasks } = storeToRefs(store)
+
 
 const filters: TaskFilter[] = ['all', 'todo', 'done']
 </script>
@@ -18,7 +22,7 @@ const filters: TaskFilter[] = ['all', 'todo', 'done']
       <ButtonFilter class="button-container" v-if="store.tasks.length" v-for="filter in filters" :key="filter" :filter
         :currentFilter="store.filter" @set-filter="store.setFilter" />
     </div>
-    <TaskList :tasks="store.filteredTasks" />
+    <TaskList :tasks="filteredTasks" />
   </main>
 </template>
 

@@ -5,6 +5,7 @@ import type { TaskFilter, Task } from '../domain/task/Task'
 import { createTask } from '../application/task/createTask'
 import { toggleTask } from '../application/task/toggleTask'
 import { removeTask } from '../application/task/removeTask'
+import { filterTasks } from '../domain/task/taskRules'
 
 export const useTaskStore = defineStore('task', () => {
     const tasks = ref<Task[]>(loadTasks())
@@ -31,12 +32,8 @@ export const useTaskStore = defineStore('task', () => {
     }
 
     const totalDone = computed(() => tasks.value.filter(t => t.done).length)
-    const filteredTasks = computed(() => {
-        if (filter.value === "all") return tasks.value
-        if (filter.value === "todo") return tasks.value.filter(t => !t.done)
-        if (filter.value === "done") return tasks.value.filter(t => t.done)
-        return tasks.value
-    })
+    const filteredTasks = computed(() => filterTasks(tasks.value, filter.value))
+
 
     return {
         tasks,

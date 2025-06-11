@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import type { Task } from '../domain/task/Task';
 import { useTaskStore } from '../stores/taskStore';
+
+defineProps<{
+    tasks: Task[]
+}>()
 
 const store = useTaskStore()
 </script>
 
 <template>
     <TransitionGroup class="task-list" name="task-list" tag="div">
-        <article v-for="task in store.filteredTasks" :key="task.id" class="task">
+        <article v-for="task in tasks" :key="task.id" class="task">
             <label>
                 <input type="checkbox" :checked="task.done" @change="store.toggleDone(task.id)" />
                 <span :class="{ done: task.done }">{{ task.title }}</span>

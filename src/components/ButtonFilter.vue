@@ -1,27 +1,24 @@
 <script setup lang="ts">
-import type { TaskFilter } from '../types';
-
+import type { TaskFilter } from '../domain/task/Task';
 
 const props = defineProps<{
-    filter: TaskFilter
+    filter: TaskFilter,
     currentFilter: TaskFilter
 }>()
 
 const emit = defineEmits<{
-    setFilter: [filter: TaskFilter]
+    setFilter: [TaskFilter]
 }>()
 
+const filterLabels: Record<TaskFilter, string> = {
+    all: 'Todas',
+    todo: 'Pendentes',
+    done: 'Concluídas'
+}
 </script>
 
 <template>
-    <button class="secondary" :class="{ contrast: props.currentFilter === props.filter }"
-        @click="emit('setFilter', props.filter)">
-        {{ props.filter }}
+    <button :class="{ active: props.filter === props.currentFilter }" @click="emit('setFilter', props.filter)">
+        {{ filterLabels[props.filter] }}
     </button>
 </template>
-
-<style>
-button {
-    text-transform: capitalize;
-}
-</style>
